@@ -1,10 +1,20 @@
 import './App.css';
+import Findings from './components/findings';
+import Show from './components/show';
+import SubmitForm from './components/submit';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+
 
 function App() {
+
   return (
-    <div className="App">
-      <h1>Hello World</h1>
-    </div>
+    <BrowserRouter>
+        qqqqqqq<Routes>
+        <Route path='/' element={<SubmitForm/>} />
+        <Route path='/Show' element={<Show/>} />
+        <Route path='/Findings' element={<Findings/>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
