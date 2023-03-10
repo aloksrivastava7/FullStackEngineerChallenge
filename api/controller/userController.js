@@ -1,3 +1,4 @@
+import User from "../models/userModel.js";
 
 // Get all Repositories
 export const getRepos = async (request, response) => {

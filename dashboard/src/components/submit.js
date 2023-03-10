@@ -6,12 +6,12 @@ import { addRepo } from '../service/api.js';
 
 const initialValue = {
   RepositoryName: '',
-  Status: '',
+  Status: 'Queued',
   Findings: {
-    RuleId: '',
-    Description: '',
-    Severity: '',
-    lineNumber: ''
+    RuleId: 'G402',
+    Description: 'TLS InsecureSkipVerify set true.',
+    Severity: 'HIGH',
+    lineNumber: '32'
   },
   QueuedAt: '',
   ScanningAt: '',
@@ -21,7 +21,6 @@ const initialValue = {
 const SubmitForm = () => {
 
   const [initialdata, setinitialdata] = useState(initialValue);
-  const {RepositoryName, Status, Findings, QueuedAt, ScanningAt, FinishedAt} = initialdata;
   let navigate = useNavigate();
   const onInputChange = (e) => {
     setinitialdata({...initialdata, [e.target.name]: e.target.value});

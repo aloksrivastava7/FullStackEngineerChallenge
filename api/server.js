@@ -14,7 +14,7 @@ dotenv.config();
 app.use(bodyParser.json({extended: true}));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
-app.use('/', Routes);
+app.use('/add', Routes);
 
 const PORT = 8000;
 
