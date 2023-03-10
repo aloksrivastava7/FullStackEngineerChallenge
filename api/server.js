@@ -1,11 +1,26 @@
-require("dotenv").config();
-const express = require('express');
+import express from 'express';
+
+import dotenv from 'dotenv';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+
+import Connection from "./database/db.js";
+import Routes from './Routes/route.js'
+
 const app = express();
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const PORT = 4000;
+
+dotenv.config();
+
+app.use(bodyParser.json({extended: true}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
-app.use(bodyParser.json());
-app.listen(PORT, function() {
-    console.log("Server is running on Port: " + PORT);
-});
+app.use('/', Routes);
+
+const PORT = 8000;
+
+const username = process.env.DB_USERNAME;
+const password = process.env.DB_PASSWORD;
+
+Connection(username, password);
+
+app.listen(PORT, () => console.log('Server is running successfully on PORT',PORT));
