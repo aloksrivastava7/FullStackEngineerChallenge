@@ -3,12 +3,13 @@ import mongoose  from "mongoose";
 let userSchema = mongoose.Schema({
     RepositoryName: String,
     Status: String,
-    Findings: {
+    Findings: [ {
         RuleId: String,
         Description: String,
         Severity: String,
         lineNumber: String
-    }}, 
+    }]
+}, 
     {timestamps: true}      
 );
 /**

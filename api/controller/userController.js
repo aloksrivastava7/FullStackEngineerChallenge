@@ -27,7 +27,7 @@ export const addRepo = async (request, response) => {
 // Get a Repository by Name
 export const getRepoById = async (request, response) => {
     try{
-        const user = await postUser.find(request.params.id);
+        const user = await postUser.findById(request.params.id);
         response.status(200).json(user);
     }catch( error ){
         response.status(404).json({ message: error.message })

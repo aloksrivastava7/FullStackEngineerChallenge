@@ -9,6 +9,14 @@ export const getRepos = async () => {
     }
 }
 
+export const getRepo = async (id) => {
+    try {
+        return await axios.get(`${URL}/show/${id}`);
+    } catch(error) {
+        console.log("Error while calling Get Repo API", error);
+    }
+}
+
 export const addRepo = async (data) => {
     try {
         return await axios.post(`${URL}/add`, data);
@@ -25,3 +33,4 @@ export const deleteRepo = async (id) => {
 export const editRepo = async (name, data) => {
     return await axios.put(`${URL}/${name}`, data)
 }
+

@@ -13,19 +13,25 @@ let navigate = useNavigate();
     getAllRepos();
   }, [])
 
-  const getAllRepos = async () => {
+  const getAllRepos = async (id) => {
     let response = await getRepos();
     setRepos(response.data);
+    
   }
 
   const deleteData = async (id) => {
     await deleteRepo(id);
     getAllRepos();
+    console.log(repos.length)
+    if(repos.length === 1) { // When no data is present
+      navigate('/');
+    }
   }
 
-  const redirectToFindings = () => {
-    getAllRepos()
-    navigate('/Findings');
+  const redirectToFindings = async (id) => {
+    // await getRepo(id);
+    // console.log(this.props.first);
+    navigate('/Findings',{state:{id:id}});
   }
 
   return (
@@ -44,7 +50,7 @@ let navigate = useNavigate();
           {
             repos.map(repo => (
               <Table.Row>
-                <Table.Cell onClick={() => redirectToFindings()}>{repo.RepositoryName}</Table.Cell>
+                <Table.Cell onClick={() => redirectToFindings(repo._id)}>{repo.RepositoryName}</Table.Cell>
                 <Table.Cell>{repo.Status}</Table.Cell>
                 <Table.Cell>
                 <div>

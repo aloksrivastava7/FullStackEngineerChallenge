@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Dropdown, Form } from 'semantic-ui-react'
+import { Button, Form, Select } from 'semantic-ui-react'
 import '../App.css'
 import { useState} from 'react';
 import {useNavigate} from 'react-router-dom'
@@ -8,31 +8,13 @@ import { addRepo } from '../service/api.js';
 const initialValue = {
   RepositoryName: '',
   Status: '',
-  Findings: {
+  Findings: [{
     RuleId: 'G402',
     Description: 'TLS InsecureSkipVerify set true.',
     Severity: 'HIGH',
     lineNumber: '32'
-  },
+  }],
 }
-
-const Status = [
-  {  
-    key: 'Scanning',
-    text: 'Scanning',
-    value: 'Scanning',
-  },
-  {  
-    key: 'Queued',
-    text: 'Queued',
-    value: 'Queued',
-  },
-  {  
-    key: 'Finished',
-    text: 'Finished',
-    value: 'Finished',
-  }
-]
 
 const SubmitForm = () => {
 
@@ -55,14 +37,13 @@ const SubmitForm = () => {
         <input placeholder='Repository Name' onChange={onInputChange} name='RepositoryName' />
       </Form.Field>
       <Form.Field>
-      <Dropdown
-        placeholder='Select Status'
-        fluid
-        selection
-        options={Status}
-        
-      />
-      </Form.Field>
+        <select onChange={onInputChange} name="Status">
+          <option value="Select Status">Select Status</option>
+          <option value="Scanning">Scanning</option>
+          <option value="Queued">Queued</option>
+          <option value="Finished">Finished</option>
+        </select>
+      </Form.Field>  
       <Button type='submit' onClick={() => addInitialData()}>Submit</Button>
     </Form>
   </div>
