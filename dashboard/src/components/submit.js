@@ -25,8 +25,13 @@ const SubmitForm = () => {
   }
 
   const addInitialData = async () => {
-    await addRepo(initialdata);
-    navigate('/show');
+    if(initialdata.RepositoryName === '' || initialdata.Status === '') {
+      navigate('/');
+    }
+    else {
+      await addRepo(initialdata);
+      navigate('/show');
+    }
   }
 
   return (
@@ -34,11 +39,11 @@ const SubmitForm = () => {
     <Form>
       <Form.Field>
         <label>Repository Name</label>
-        <input placeholder='Repository Name' onChange={onInputChange} name='RepositoryName' />
+        <input placeholder='Repository Name' onChange={onInputChange} name='RepositoryName' required/>
       </Form.Field>
       <Form.Field>
-        <select onChange={onInputChange} name="Status">
-          <option value="Select Status">Select Status</option>
+        <select onChange={onInputChange} name="Status" required>
+          <option value="Select Status" selected="true" disabled="disabled">Select Status</option>
           <option value="Scanning">Scanning</option>
           <option value="Queued">Queued</option>
           <option value="Finished">Finished</option>
