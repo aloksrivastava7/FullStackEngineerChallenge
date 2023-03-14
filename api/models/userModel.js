@@ -1,6 +1,6 @@
 import mongoose  from "mongoose";
 // import autoIncrement from 'mongoose-auto-increment';
-const userSchema = mongoose.Schema({
+let userSchema = mongoose.Schema({
     RepositoryName: String,
     Status: String,
     Findings: {
@@ -8,11 +8,9 @@ const userSchema = mongoose.Schema({
         Description: String,
         Severity: String,
         lineNumber: String
-    },
-    QueuedAt: String,
-    ScanningAt: String,
-    FinishedAt: String
-});
+    }}, 
+    {timestamps: true}      
+);
 /**
  * autoIncrement.initialize(mongoose.connection);
     userSchema.plugin(autoIncrement.plugin,'userModel');
@@ -22,7 +20,7 @@ const userSchema = mongoose.Schema({
 
 // modules.export = mongoose.model('userModel', userSchema);
 
-const postUser = mongoose.model('userModel', userSchema);
+const postUser = mongoose.model('ScanResult', userSchema);
 
 
 // export default userSchema;

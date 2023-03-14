@@ -1,8 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Table } from 'semantic-ui-react'
+import { useEffect } from 'react'
+import { getRepos } from '../service/api'
 import '../App.css'
 
-const Findings = () => (
+const Findings = () => {
+  useEffect(() => {
+    loadRepoDetails();
+  }, [])
+ 
+  const[repos, setRepos] = useState([]);
+  const loadRepoDetails = async () => {
+  let response = await getRepos();
+  setRepos(response.data);
+ } 
+  return (
   <div className='findingstable'>
     <Table singleLine>
       <Table.Header>
@@ -10,20 +22,24 @@ const Findings = () => (
           <Table.HeaderCell>Rule ID</Table.HeaderCell>
           <Table.HeaderCell>Description</Table.HeaderCell>
           <Table.HeaderCell>Severity</Table.HeaderCell>
-          <Table.HeaderCell>Path name</Table.HeaderCell>
+          <Table.HeaderCell>Line Number</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
-
       <Table.Body>
-        <Table.Row>
-          <Table.Cell>John Lilki</Table.Cell>
-          <Table.Cell>September 14, 2013</Table.Cell>
-          <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
-          <Table.Cell>No</Table.Cell>
-        </Table.Row>
+      {
+          repos.map(repo => (
+          <Table.Row>
+            <Table.Cell>{repo.Findings.RuleId}</Table.Cell>
+            <Table.Cell>{repo.Findings.Description}</Table.Cell>
+            <Table.Cell>{repo.Findings.Severity}</Table.Cell>
+            <Table.Cell>{repo.Findings.lineNumber}</Table.Cell>
+          </Table.Row>
+
+          ))
+      }
       </Table.Body>
     </Table>
   </div>
-)
+)}
 
 export default Findings

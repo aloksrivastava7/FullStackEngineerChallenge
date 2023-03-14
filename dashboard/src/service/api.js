@@ -22,6 +22,6 @@ export const deleteRepo = async (id) => {
     return await axios.delete(`${URL}/${id}`);
 }
 
-export const editRepo = async (id, user) => {
-    return await axios.put(`${URL}/${id}`, user)
+export const editRepo = async (name, data) => {
+    return await axios.put(`${URL}/${name}`, data)
 }

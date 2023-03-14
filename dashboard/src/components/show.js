@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
-import { Table, Label } from 'semantic-ui-react'
+import { Table, Label, Button } from 'semantic-ui-react'
 import '../App.css'
-import { getRepos } from '../service/api';
+import { deleteRepo, getRepos } from '../service/api';
 import { useEffect } from 'react';
+import {useNavigate} from 'react-router-dom'
 
 const Show = () => {
 
 const[repos, setRepos] = useState([]);
-
+let navigate = useNavigate();
   useEffect(() => {
     getAllRepos();
   }, [])
@@ -15,6 +16,16 @@ const[repos, setRepos] = useState([]);
   const getAllRepos = async () => {
     let response = await getRepos();
     setRepos(response.data);
+  }
+
+  const deleteData = async (id) => {
+    await deleteRepo(id);
+    getAllRepos();
+  }
+
+  const redirectToFindings = () => {
+    getAllRepos()
+    navigate('/Findings');
   }
 
   return (
@@ -25,6 +36,7 @@ const[repos, setRepos] = useState([]);
             <Table.HeaderCell>Repo Name</Table.HeaderCell>
             <Table.HeaderCell>Status</Table.HeaderCell>
             <Table.HeaderCell>Findings</Table.HeaderCell>
+            <Table.HeaderCell></Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
@@ -32,27 +44,18 @@ const[repos, setRepos] = useState([]);
           {
             repos.map(repo => (
               <Table.Row>
-                <Table.Cell>{repo.RepositoryName}</Table.Cell>
+                <Table.Cell onClick={() => redirectToFindings()}>{repo.RepositoryName}</Table.Cell>
                 <Table.Cell>{repo.Status}</Table.Cell>
                 <Table.Cell>
                 <div>
                   <Label as='a' color='blue' image>
-                    Rule ID
-                    <Label.Detail>{repo.Findings.RuleId}</Label.Detail>
-                  </Label>
-                  <Label as='a' color='teal' image>
-                    Description
-                    <Label.Detail>{repo.Findings.Description}</Label.Detail>
-                  </Label>
-                  <Label as='a' color='yellow' image>
-                    Severity
-                    <Label.Detail>{repo.Findings.Severity}</Label.Detail>
-                  </Label>
-                  <Label as='a' color='red' image>
-                    Line Number
-                    <Label.Detail>{repo.Findings.lineNumber}</Label.Detail>
+                  {repo.Status}
+                    <Label.Detail>{repo.createdAt}</Label.Detail>
                   </Label>
                 </div>
+                </Table.Cell>
+                <Table.Cell>
+                  <Button variant="contained" onClick={() => deleteData(repo._id)}>Delete</Button>
                 </Table.Cell>
               </Table.Row>
             ))

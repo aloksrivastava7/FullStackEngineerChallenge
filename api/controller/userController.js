@@ -1,5 +1,4 @@
  import postUser from "../models/userModel.js";
- import userSchema from "../models/userModel.js";
 
 // Get all Repositories
 export const getRepos = async (request, response) => {
@@ -51,7 +50,7 @@ export const editRepo = async (request, response) => {
 // deleting data of user from the database
 export const deleteRepo = async (request, response) => {
     try{
-        await postUser.delete({_id: request.params.id});
+        await postUser.deleteOne({_id: request.params.id});
         response.status(201).json("User deleted Successfully");
     } catch (error){
         response.status(409).json({ message: error.message});     
