@@ -20,7 +20,7 @@ const Findings = () => {
      let response=await getRepo(id);
     //  const data=response.data.Findings
      setRepos(response.data.Findings)
-    //  console.log(response.data.Findings);
+     console.log(response.data.Findings);
   };
 
   return (

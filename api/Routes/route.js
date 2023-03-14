@@ -7,6 +7,6 @@ router.get('/show', getRepos);
 router.post('/add', addRepo);
 router.put('/:id', editRepo);
 router.delete('/:id', deleteRepo);
-router.get('/:id', getRepoById);
+router.get('/show/:id', getRepoById);
 
 export default router; 
