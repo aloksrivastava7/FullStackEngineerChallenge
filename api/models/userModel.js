@@ -1,6 +1,5 @@
 import mongoose  from "mongoose";
-import autoIncrement from 'mongoose-auto-increment';
-
+// import autoIncrement from 'mongoose-auto-increment';
 const userSchema = mongoose.Schema({
     RepositoryName: String,
     Status: String,
@@ -14,10 +13,17 @@ const userSchema = mongoose.Schema({
     ScanningAt: String,
     FinishedAt: String
 });
+/**
+ * autoIncrement.initialize(mongoose.connection);
+    userSchema.plugin(autoIncrement.plugin,'userModel');
+ * 
+ */
 
-autoIncrement.initialize(mongoose.connection);
-userSchema.plugin(autoIncrement.plugin,'userModel');
+
+// modules.export = mongoose.model('userModel', userSchema);
 
 const postUser = mongoose.model('userModel', userSchema);
 
-export default postUser;
+
+// export default userSchema;
+ export default postUser;

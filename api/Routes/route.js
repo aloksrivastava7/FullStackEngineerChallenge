@@ -3,7 +3,7 @@ import { getRepos, addRepo, editRepo, deleteRepo } from '../controller/userContr
 
 const router = express.Router();
 
-router.get('/all', getRepos);
+router.get('/show', getRepos);
 router.post('/add', addRepo);
 router.put('/:id', editRepo);
 router.delete('/:id', deleteRepo);

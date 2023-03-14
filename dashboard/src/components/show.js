@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Table } from 'semantic-ui-react'
+import { Table, Label } from 'semantic-ui-react'
 import '../App.css'
 import { getRepos } from '../service/api';
 import { useEffect } from 'react';
@@ -34,7 +34,26 @@ const[repos, setRepos] = useState([]);
               <Table.Row>
                 <Table.Cell>{repo.RepositoryName}</Table.Cell>
                 <Table.Cell>{repo.Status}</Table.Cell>
-                <Table.Cell>{repo.Findings}</Table.Cell>
+                <Table.Cell>
+                <div>
+                  <Label as='a' color='blue' image>
+                    Rule ID
+                    <Label.Detail>{repo.Findings.RuleId}</Label.Detail>
+                  </Label>
+                  <Label as='a' color='teal' image>
+                    Description
+                    <Label.Detail>{repo.Findings.Description}</Label.Detail>
+                  </Label>
+                  <Label as='a' color='yellow' image>
+                    Severity
+                    <Label.Detail>{repo.Findings.Severity}</Label.Detail>
+                  </Label>
+                  <Label as='a' color='red' image>
+                    Line Number
+                    <Label.Detail>{repo.Findings.lineNumber}</Label.Detail>
+                  </Label>
+                </div>
+                </Table.Cell>
               </Table.Row>
             ))
           }

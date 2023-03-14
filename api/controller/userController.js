@@ -1,9 +1,10 @@
-import User from "../models/userModel.js";
+ import postUser from "../models/userModel.js";
+ import userSchema from "../models/userModel.js";
 
 // Get all Repositories
 export const getRepos = async (request, response) => {
     try{
-        const users = await User.findOne();
+        const users = await postUser.find({});
         response.status(200).json(users);
     }catch( error ){
         response.status(404).json({ message: error.message })
@@ -14,7 +15,7 @@ export const getRepos = async (request, response) => {
 export const addRepo = async (request, response) => {
     const user = request.body;
     
-    const newUser = new User(user);
+    const newUser = new postUser(user);
     try{
         await newUser.save();
         response.status(201).json(newUser);
@@ -27,7 +28,7 @@ export const addRepo = async (request, response) => {
 // Get a Repository by Name
 export const getRepoById = async (request, response) => {
     try{
-        const user = await User.findById(request.params.id);
+        const user = await postUser.find(request.params.id);
         response.status(200).json(user);
     }catch( error ){
         response.status(404).json({ message: error.message })
@@ -38,9 +39,9 @@ export const getRepoById = async (request, response) => {
 export const editRepo = async (request, response) => {
     let user = request.body;
 
-    const editUser = new User(user);
+    const editUser = new postUser(user);
     try{
-        await User.updateOne({_id: request.params.id}, editUser);
+        await editUser.updateOne({_id: request.params.id}, editUser);
         response.status(201).json(editUser);
     } catch (error){
         response.status(409).json({ message: error.message});     
@@ -50,7 +51,7 @@ export const editRepo = async (request, response) => {
 // deleting data of user from the database
 export const deleteRepo = async (request, response) => {
     try{
-        await User.deleteOne({_id: request.params.id});
+        await postUser.delete({_id: request.params.id});
         response.status(201).json("User deleted Successfully");
     } catch (error){
         response.status(409).json({ message: error.message});     

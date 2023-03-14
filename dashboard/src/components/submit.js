@@ -1,7 +1,8 @@
 import React from 'react'
 import { Button, Form } from 'semantic-ui-react'
 import '../App.css'
-import { useState, useNavigate } from 'react';
+import { useState} from 'react';
+import {useNavigate} from 'react-router-dom'
 import { addRepo } from '../service/api.js';
 
 const initialValue = {
@@ -13,9 +14,6 @@ const initialValue = {
     Severity: 'HIGH',
     lineNumber: '32'
   },
-  QueuedAt: '',
-  ScanningAt: '',
-  FinishedAt: ''
 }
 
 const SubmitForm = () => {
@@ -36,7 +34,11 @@ const SubmitForm = () => {
     <Form>
       <Form.Field>
         <label>Repository Name</label>
-        <input placeholder='Repository Name' onChange={(e) => onInputChange(e)} name='RepositoryName' />
+        <input placeholder='Repository Name' onChange={onInputChange} name='RepositoryName' />
+      </Form.Field>
+      <Form.Field>
+        <label>Status</label>
+        <input placeholder='Status' onChange={onInputChange} name='Status' />
       </Form.Field>
       <Button type='submit' onClick={() => addInitialData()}>Submit</Button>
     </Form>
