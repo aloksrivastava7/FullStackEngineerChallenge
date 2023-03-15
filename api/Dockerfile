@@ -1,20 +1,18 @@
 #  Dockerfile for Node Express Backend
 
-FROM node:10.16-alpine
+FROM node
 
 # Create App Directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+
+WORKDIR /app
 
 # Install Dependencies
 COPY package*.json ./
 
-RUN npm install --silent
+RUN npm install 
 
 # Copy app source code
-COPY . .
+
 
 # Exports
-EXPOSE 5000
-
-CMD ["npm","start"]
+EXPOSE 8000
