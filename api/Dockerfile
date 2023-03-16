@@ -15,4 +15,8 @@ RUN npm install
 
 
 # Exports
-EXPOSE 8000
+EXPOSE 8000:8000
+
+# Runs "npm start" after the above step is completed
+# CMD ["npm", "start"]
+

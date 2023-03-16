@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Form } from 'semantic-ui-react'
 import '../App.css'
 import { useState} from 'react';
-import {useNavigate} from 'react-router-dom'
+import {redirect, useNavigate} from 'react-router-dom'
 import { addRepo } from '../service/api.js';
 
 const initialValue = {
@@ -34,6 +34,9 @@ const SubmitForm = () => {
     }
   }
 
+  const redirectToShow = async () => {
+    navigate('/show');
+  }
   return (
     <div className='form'>
     <Form>
@@ -50,6 +53,7 @@ const SubmitForm = () => {
         </select>
       </Form.Field>  
       <Button type='submit' onClick={() => addInitialData()}>Submit</Button>
+      <Button type='submit' onClick={() => redirectToShow()}>Show existing Scan Results</Button>
     </Form>
   </div>
   )

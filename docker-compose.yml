@@ -3,12 +3,12 @@ version: '3.7'
 services:
   server:
     build: ./api
-    command: npm start
+    # command: npm start
     ports:
       - "8000:8000"
   client:
     build: ./dashboard
-    command: npm start
+    # command: npm start
     ports:
       - "3000:3000"
     

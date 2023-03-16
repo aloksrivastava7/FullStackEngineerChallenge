@@ -12,6 +12,9 @@ COPY package*.json ./
 
 RUN npm install 
 
+#Ports
+EXPOSE 3000:3000
 
 
-EXPOSE 3000
+# Runs "npm start" after the above step is completed
+# CMD ["npm", "start"]

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Table } from "semantic-ui-react";
+import { Table, Button } from "semantic-ui-react";
 import { useEffect } from "react";
 import { getRepo } from "../service/api";
 import "../App.css";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 
 const Findings = () => {
   const location = useLocation();
@@ -11,7 +11,7 @@ const Findings = () => {
   useEffect(() => {
     loadRepoDetails();
   }, []);
-
+  const navigate = useNavigate();
   const [repo, setRepos] = useState( []);
   const loadRepoDetails = async () => {
     // let response = await getRepos();
@@ -23,6 +23,9 @@ const Findings = () => {
      console.log(response.data.Findings);
   };
 
+  const redirectToShow = () => {
+    navigate('/show');
+  }
   return (
     <div className="findingstable">
       <Table singleLine>
@@ -47,6 +50,9 @@ const Findings = () => {
          <div>{repos.RuleId}</div> */}
         </Table.Body>
       </Table>
+      <div className="button">
+      <Button type='submit' onClick={() => redirectToShow()}>Show existing Scan Results</Button>
+      </div>
     </div>
   );
 };

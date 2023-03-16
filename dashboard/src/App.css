@@ -9,3 +9,16 @@
 .findingstable {
   margin: 10%;
 }
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading {
+  margin-top: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
