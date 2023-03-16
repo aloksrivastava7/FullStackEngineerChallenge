@@ -11,6 +11,9 @@ const[repos, setRepos] = useState([]);
 let navigate = useNavigate();
   useEffect(() => {
     getAllRepos();
+    if(repos.length === 1) { // When no data is present
+      navigate('/');
+    }
   }, [])
 
   const getAllRepos = async (id) => {
@@ -23,9 +26,6 @@ let navigate = useNavigate();
     await deleteRepo(id);
     getAllRepos();
     console.log(repos.length)
-    if(repos.length === 1) { // When no data is present
-      navigate('/');
-    }
   }
 
   const redirectToFindings = async (id) => {
