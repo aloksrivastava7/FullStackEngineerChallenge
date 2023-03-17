@@ -2,23 +2,24 @@ import React from 'react'
 import { Button, Form } from 'semantic-ui-react'
 import '../App.css'
 import { useState} from 'react';
-import {redirect, useNavigate} from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 import { addRepo } from '../service/api.js';
 
 const initialValue = {
   RepositoryName: '',
   Status: '',
   Findings: [{
-    RuleId: 'G402',
-    Description: 'TLS InsecureSkipVerify set true.',
-    Severity: 'HIGH',
-    lineNumber: '32'
-  }],
+    RuleId: '',
+    Description: '',
+    Severity: '',
+    LineNumber: '',
+  }]
 }
 
 const SubmitForm = () => {
 
   const [initialdata, setinitialdata] = useState(initialValue);
+  const [findingsData, setFindingsData] = useState({});
   let navigate = useNavigate();
   const onInputChange = (e) => {
     setinitialdata({...initialdata, [e.target.name]: e.target.value});
@@ -37,6 +38,12 @@ const SubmitForm = () => {
   const redirectToShow = async () => {
     navigate('/show');
   }
+
+  const inputFindings = (e) => {
+    setFindingsData({...findingsData, [e.target.name]: e.target.value});
+    setinitialdata({...initialdata, Findings: findingsData});
+  }
+
   return (
     <div className='form'>
     <Form>
@@ -52,6 +59,18 @@ const SubmitForm = () => {
           <option value="Finished">Finished</option>
         </select>
       </Form.Field>  
+      <Form.Field>
+        <input placeholder='Rule Id' onChange={inputFindings} name='RuleId' required/>
+      </Form.Field>
+      <Form.Field>
+        <input placeholder='Description' onChange={inputFindings} name='Description' required/>
+      </Form.Field>
+      <Form.Field>
+        <input placeholder='Severity' onChange={inputFindings} name='Severity' required/>
+      </Form.Field>
+      <Form.Field>
+        <input placeholder='Line Number' onChange={inputFindings} name='LineNumber' required/>
+      </Form.Field>
       <Button type='submit' onClick={() => addInitialData()}>Submit</Button>
       <Button type='submit' onClick={() => redirectToShow()}>Show existing Scan Results</Button>
     </Form>

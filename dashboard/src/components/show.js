@@ -11,15 +11,14 @@ const[repos, setRepos] = useState([]);
 let navigate = useNavigate();
   useEffect(() => {
     getAllRepos();
-    if(repos.length === 1) { // When no data is present
-      navigate('/');
-    }
   }, [])
 
   const getAllRepos = async (id) => {
     let response = await getRepos();
     setRepos(response.data);
-    
+    if(repos.length === 1) { // When no data is present
+      navigate('/');
+    }
   }
 
   const deleteData = async (id) => {
